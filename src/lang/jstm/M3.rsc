@@ -41,25 +41,11 @@ M3 stm2m3(start[JStm] stm) {
   m.mapsTo = { <stateName(s.name), |java+field:///<pkg>/<s.name>_state| > | (ClassMemberDec)`<State s>` <- stm.top.ctl.members }
     + { <eventName(e.name), |java+field:///<pkg>/<e.name>_event| > | (ClassMemberDec)`<Event e>` <- stm.top.ctl.members }
     + { <stmName(), |java+class:///<pkg>| > };
-    
+ 
+  m.messages = [ error("Undefined event", use) | /Transition t := stm, loc use := t.event@\loc, <use, loc decl> <- m.uses, decl notin m.declarations<0> ]
+    + [ error("Undefined state", use) | /Transition t := stm, loc use := t.state@\loc, <use, loc decl> <- m.uses, decl notin m.declarations<0> ];   
   
   return m;  
 }
 
 
-start[JStm] annotateStm(start[JStm] stm, M3 m3) {
-  stm = visit (stm) {
-    case Id x => x[@link=src]
-      when loc use := x@\loc, <use, loc decl> <- m3.uses, <decl, loc src> <- m3.declarations 
-  };
-  
-  msgs = { error("Undefined event", use) |
-    /Transition t := stm, loc use := t.event@\loc, <use, loc decl> <- m3.uses, decl notin m3.declarations<0> } 
-  
-    + { error("Undefined state", use) |
-       /Transition t := stm, loc use := t.state@\loc, <use, loc decl> <- m3.uses, decl notin m3.declarations<0> };
-  
-  msgs += { msg | Message msg <- m3.messages };
-  
-  return stm[@messages=msgs];
-}

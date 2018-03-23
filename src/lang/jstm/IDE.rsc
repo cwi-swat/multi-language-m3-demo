@@ -18,13 +18,6 @@ import lang::java::m3::Core;
 
 private str JSTM = "JStm";
 
-M3 mergeM3s(M3 jstm, M3 j, rel[loc, loc] orgs) {
-  jstm.declarations += { <jentity, recoverLoc(jsrc, orgs)> | <loc jentity, loc jsrc> <- j.declarations };
-  jstm.uses += { <recoverLoc(jsrc, orgs), jentity> | <loc jsrc, loc jentity> <- j.uses };
-  jstm.messages += [ msg[at=recoverLoc(msg.at, orgs)] | Message msg <- j.messages ];
-  return jstm;
-}
-
 void main() {
   registerLanguage(JSTM, "jstm", start[JStm](str src, loc org) {
     return parse(#start[JStm], src, org);
@@ -59,4 +52,21 @@ void main() {
       return {};
     })
   });
+}
+
+
+M3 mergeM3s(M3 jstm, M3 j, rel[loc, loc] orgs) {
+  jstm.declarations += { <jentity, recoverLoc(jsrc, orgs)> | <loc jentity, loc jsrc> <- j.declarations };
+  jstm.uses += { <recoverLoc(jsrc, orgs), jentity> | <loc jsrc, loc jentity> <- j.uses };
+  jstm.messages += [ msg[at=recoverLoc(msg.at, orgs)] | Message msg <- j.messages ];
+  return jstm;
+}
+
+start[JStm] annotateStm(start[JStm] stm, M3 m3) {
+  stm = visit (stm) {
+    case Id x => x[@link=src]
+      when loc use := x@\loc, <use, loc decl> <- m3.uses, <decl, loc src> <- m3.declarations 
+  };
+  
+  return stm[@messages={ msg | Message msg <- m3.messages }];
 }
