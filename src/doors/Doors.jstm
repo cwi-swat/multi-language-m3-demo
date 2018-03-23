@@ -3,6 +3,7 @@ package doors;
 import java.util.List;
 import java.util.ArrayList;
 
+
 statemachine Doors {
   private List<String> tokens = new ArrayList<String>();
   
@@ -13,9 +14,7 @@ statemachine Doors {
   
   state closed {
     System.out.println("We're closed now");
-    if (token.equals(tokens)) {
-      tokens.add(token);
-    }
+    tokens.add(token);
     on open => opened;
     on lock => locked;
   }
@@ -29,6 +28,4 @@ statemachine Doors {
     on unlock => closed;
   }
   
-  
-  
-}    
+}
