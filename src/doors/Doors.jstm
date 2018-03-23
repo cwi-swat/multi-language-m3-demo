@@ -3,7 +3,6 @@ package doors;
 import java.util.List;
 import java.util.ArrayList;
 
-
 statemachine Doors {
   private List<String> tokens = new ArrayList<String>();
   

@@ -21,18 +21,17 @@ public class Doors {
   
 
   
-    private List/*src: |project://multi-language-m3-demo/src/doors/Doors.jstm|(100,4,<8,10>,<8,14>) */<String/*src: |project://multi-language-m3-demo/src/doors/Doors.jstm|(105,6,<8,15>,<8,21>) */> tokens/*src: |project://multi-language-m3-demo/src/doors/Doors.jstm|(113,6,<8,23>,<8,29>) */ = new ArrayList/*src: |project://multi-language-m3-demo/src/doors/Doors.jstm|(126,9,<8,36>,<8,45>) */<String/*src: |project://multi-language-m3-demo/src/doors/Doors.jstm|(136,6,<8,46>,<8,52>) */>();
+    private List/*src: |project://multi-language-m3-demo/src/doors/Doors.jstm|(99,4,<7,10>,<7,14>) */<String/*src: |project://multi-language-m3-demo/src/doors/Doors.jstm|(104,6,<7,15>,<7,21>) */> tokens/*src: |project://multi-language-m3-demo/src/doors/Doors.jstm|(112,6,<7,23>,<7,29>) */ = new ArrayList/*src: |project://multi-language-m3-demo/src/doors/Doors.jstm|(125,9,<7,36>,<7,45>) */<String/*src: |project://multi-language-m3-demo/src/doors/Doors.jstm|(135,6,<7,46>,<7,52>) */>();
   
+
+  private int $state = 0;
   
-  public void run(java.util.Scanner input) {
-    int $state = 0;
-    while (true) {
-      String $token = input.nextLine();
+  public void step(String $token) {
       switch ($state) {
         
         case closed_state:
-          System/*src: |project://multi-language-m3-demo/src/doors/Doors.jstm|(260,6,<16,4>,<16,10>) */.out/*src: |project://multi-language-m3-demo/src/doors/Doors.jstm|(267,3,<16,11>,<16,14>) */.println/*src: |project://multi-language-m3-demo/src/doors/Doors.jstm|(271,7,<16,15>,<16,22>) */("We're closed now");
-              tokens/*src: |project://multi-language-m3-demo/src/doors/Doors.jstm|(304,6,<17,4>,<17,10>) */.add/*src: |project://multi-language-m3-demo/src/doors/Doors.jstm|(311,3,<17,11>,<17,14>) */($token/*src: |project://multi-language-m3-demo/src/lang/jstm/Compile.rsc|(1625,6) */);
+          System/*src: |project://multi-language-m3-demo/src/doors/Doors.jstm|(259,6,<15,4>,<15,10>) */.out/*src: |project://multi-language-m3-demo/src/doors/Doors.jstm|(266,3,<15,11>,<15,14>) */.println/*src: |project://multi-language-m3-demo/src/doors/Doors.jstm|(270,7,<15,15>,<15,22>) */("We're closed now");
+              tokens/*src: |project://multi-language-m3-demo/src/doors/Doors.jstm|(303,6,<16,4>,<16,10>) */.add/*src: |project://multi-language-m3-demo/src/doors/Doors.jstm|(310,3,<16,11>,<16,14>) */($token/*src: |project://multi-language-m3-demo/src/lang/jstm/Compile.rsc|(1542,6) */);
           
             if ($token.equals(open_event)) {
               $state = opened_state;
@@ -45,7 +44,7 @@ public class Doors {
           break;
         
         case opened_state:
-          System/*src: |project://multi-language-m3-demo/src/doors/Doors.jstm|(397,6,<23,4>,<23,10>) */.out/*src: |project://multi-language-m3-demo/src/doors/Doors.jstm|(404,3,<23,11>,<23,14>) */.println/*src: |project://multi-language-m3-demo/src/doors/Doors.jstm|(408,7,<23,15>,<23,22>) */("We're opened now");
+          System/*src: |project://multi-language-m3-demo/src/doors/Doors.jstm|(396,6,<22,4>,<22,10>) */.out/*src: |project://multi-language-m3-demo/src/doors/Doors.jstm|(403,3,<22,11>,<22,14>) */.println/*src: |project://multi-language-m3-demo/src/doors/Doors.jstm|(407,7,<22,15>,<22,22>) */("We're opened now");
           
             if ($token.equals(close_event)) {
               $state = closed_state;
@@ -63,6 +62,5 @@ public class Doors {
           break;
         
       }
-    }
   }    
 }

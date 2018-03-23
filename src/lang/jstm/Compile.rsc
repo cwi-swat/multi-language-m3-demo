@@ -22,7 +22,7 @@ str compile((JStm)`<ImportDec* ds> <Controller ctl>`)
 
 str ctl2java((Controller)`statemachine <Id x> {<ClassMemberDec* ms>}`)
   = "public class <x> {
-    '  <for ((ClassMemberDec)`<State s>` <- ms) {>
+    '  <for (int i := 0, (ClassMemberDec)`<State s>` <- ms) {>
     '    private static final int <s.name>_state = <i>;
     '  <i += 1; }> 
     '
@@ -33,11 +33,10 @@ str ctl2java((Controller)`statemachine <Id x> {<ClassMemberDec* ms>}`)
     '  <for (ClassMemberDec m <- ms, !(m is event), !(m is state)) {>
     '    <trackedJava(m)>
     '  <}>
+    '
+    '  private int $state = 0;
     '  
-    '  public void run(java.util.Scanner input) {
-    '    int $state = 0;
-    '    while (true) {
-    '      String $token = input.nextLine();
+    '  public void step(String $token) {
     '      switch ($state) {
     '        <for ((ClassMemberDec)`state <Id s> {<BlockStm* ss> <Transition* ts>}` <- ms) {>
     '        case <s>_state:
@@ -50,10 +49,8 @@ str ctl2java((Controller)`statemachine <Id x> {<ClassMemberDec* ms>}`)
     '          break;
     '        <}>
     '      }
-    '    }
     '  }    
-    '}"
-  when int i := 0;
+    '}";
 
 
 BlockStm* substTokenKeyword(BlockStm* ss)
