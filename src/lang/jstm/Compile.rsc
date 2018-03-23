@@ -52,7 +52,9 @@ str ctl2java((Controller)`statemachine <Id x> {<ClassMemberDec* ms>}`)
     '}";
 
 str stateField(Id s) = "<s>$state";
+
 str eventField(Id e) = "<e>$event";
+
 BlockStm* substTokenKeyword(BlockStm* ss)
   = visit (ss) { case (Expr)`token` => (Expr)`$token` };
   
