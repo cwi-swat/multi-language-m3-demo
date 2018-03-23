@@ -21,7 +21,7 @@ keyword Keyword
 syntax Event = event: "event" Id name StringLiteral token ";";
 
 syntax State  
-  = "state" Id name "{" BlockStm* actions Transition* transitions "}";
+  = @Foldable "state" Id name "{" BlockStm* actions Transition* transitions "}";
 
 syntax Transition 
   = "on" Id event "=\>" Id state ";"

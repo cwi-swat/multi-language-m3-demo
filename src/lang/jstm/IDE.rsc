@@ -4,7 +4,7 @@ import lang::jstm::JStm;
 import lang::jstm::Compile;
 import lang::jstm::M3;
 import lang::jstm::TrackIds;
-
+import lang::jstm::Outline;
 
 import util::IDE;
 import ParseTree;
@@ -44,6 +44,10 @@ void main() {
         
         return annotateStm(pt, jstm);
       }
+    }),
+    
+    outliner(node (start[JStm] pt) {
+      return outline(pt, stm2m3(pt));
     }),
     
     builder(set[Message](start[JStm] pt) {

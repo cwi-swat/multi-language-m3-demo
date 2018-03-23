@@ -35,16 +35,21 @@ str ctl2java((Controller)`statemachine <Id x> {<ClassMemberDec* ms>}`)
     '
     '  private int $state = 0;
     '  
+    '  <for ((ClassMemberDec)`state <Id s> {<BlockStm* ss> <Transition* ts>}` <- ms) {>
+    '  private void <stateMethod(s)>(String $token) {
+    '     <trackedJava(substTokenKeyword(ss))>
+    '     <for ((Transition)`on <Id e> =\> <Id t>;` <- ts) {>
+    '       if ($token.equals(<eventField(e)>)) {
+    '          $state = <stateField(t)>;
+    '        }
+    '     <}>
+    '  }
+    '  <}>
     '  public void step(String $token) {
     '      switch ($state) {
     '        <for ((ClassMemberDec)`state <Id s> {<BlockStm* ss> <Transition* ts>}` <- ms) {>
     '        case <stateField(s)>:
-    '          <trackedJava(substTokenKeyword(ss))>
-    '          <for ((Transition)`on <Id e> =\> <Id t>;` <- ts) {>
-    '            if ($token.equals(<eventField(e)>)) {
-    '              $state = <stateField(t)>;
-    '            }
-    '          <}>
+    '          <stateMethod(s)>($token);  
     '          break;
     '        <}>
     '      }
@@ -53,7 +58,10 @@ str ctl2java((Controller)`statemachine <Id x> {<ClassMemberDec* ms>}`)
 
 str stateField(Id s) = "<s>$state";
 
+str stateMethod(Id s) = "dispatch$<s>";
+
 str eventField(Id e) = "<e>$event";
+
 
 BlockStm* substTokenKeyword(BlockStm* ss)
   = visit (ss) { case (Expr)`token` => (Expr)`$token` };

@@ -8,23 +8,16 @@ statemachine Doors {
   
   event open "OP2K";
   event close "CL2K";
-  event unlock "UNLK";
-  event lock "LCK";
   
   state closed {
     System.out.println("We're closed now");
     tokens.add(token);
     on open => opened;
-    on lock => locked;
   }
   
   state opened {
     System.out.println("We're opened now");
     on close => closed;
-  }
-  
-  state locked {
-    on unlock => closed;
   }
   
 }

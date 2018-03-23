@@ -23,11 +23,13 @@ rel[loc, loc] recoverOrigins(Id x, Tree k)
   when /^\/\*src: <l:[^*]*> \*\// := "<k>"; 
   
 default rel[loc, loc] recoverOrigins(appl(_, list[Tree] args), Tree k)
-  = ( {} | it + recoverOrigins(args[i], i == size(args) - 1 ? k : args[i+1]) | int i <- [0..size(args)] );
+  = ( {} | it + recoverOrigins(args[i], nextLayout(i, args, k)) | int i <- [0..size(args)] );
+
+Tree nextLayout(int i, list[Tree] args, Tree k)
+  = i == size(args) - 1 ? k : args[i+1];
 
 loc recoverLoc(loc l, rel[loc, loc] orgs) = r
-  when 
-    // lengths are borked by M3 (includes whitespace after tokens)
+  when // lengths are borked by M3 (includes whitespace after tokens)
     <loc m3loc, loc r> <- orgs, m3loc.path == l.path, m3loc.offset == l.offset;
     
 default loc recoverLoc(loc l, rel[loc, loc] orgs) = l;
