@@ -38,6 +38,7 @@ void main() {
         
         m.declarations += { <jentity, recoverLoc(jsrc, orgs)> | <loc jentity, loc jsrc> <- jm3.declarations };
         m.uses += { <recoverLoc(jsrc, orgs), jentity> | <loc jsrc, loc jentity> <- jm3.uses };
+        m.messages += [ msg[at=recoverLoc(msg.at, orgs)] | Message msg <- jm3.messages ];
         registerProject(|project://<pt@\loc.authority>|, m);
         return annotateStm(pt, m);
       }

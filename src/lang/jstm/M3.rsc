@@ -59,5 +59,7 @@ start[JStm] annotateStm(start[JStm] stm, M3 m3) {
     + { error("Undefined state", use) |
        /Transition t := stm, loc use := t.state@\loc, <use, loc decl> <- m3.uses, decl notin m3.declarations<0> };
   
+  msgs += { msg | Message msg <- m3.messages };
+  
   return stm[@messages=msgs];
 }
