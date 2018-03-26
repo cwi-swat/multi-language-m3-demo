@@ -10,10 +10,11 @@ doorsFile = |project://multi-language-m3-demo/src/doors/Doors.jstm|;
 
 
 // Show the Doors file
-// jump to definition both Java and DSL
 // outline
 // highlighting
 // save = compile, show java code.
+// jump to definition both Java and DSL
+// errors in Java and state machines.
 
 
 // Parse the file
@@ -39,9 +40,15 @@ javaFile = |project://multi-language-m3-demo/src/doors/Doors.java|;
 
 doorsJavaM3 = createM3FromFile(javaFile);
 
+// Combine
+
+m3both = mergeM3s(doorsM3, javaFile);
+
+text(m3both); // show uses between state machines and java methods
 
 
-// 
+
+// If time permits
 
 Main.boom(this); 
 
