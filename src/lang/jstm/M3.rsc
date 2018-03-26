@@ -38,10 +38,10 @@ M3 stm2m3(start[JStm] stm) {
     + { <stmName(), eventName(e.name)> | (ClassMemberDec)`<Event e>` <- stm.top.ctl.members }
     + { <stateName(s.name), transName(s.name, t.event)> | (ClassMemberDec)`<State s>` <- stm.top.ctl.members, Transition t <- s.transitions };
   
-  m.mapsTo = { <stateName(s.name), |java+field:///<pkg>/<s.name>$state| > | (ClassMemberDec)`<State s>` <- stm.top.ctl.members }
-    + { <stateName(s.name), |java+method:///<pkg>/dispatch$<s.name>| > | (ClassMemberDec)`<State s>` <- stm.top.ctl.members }
-    + { <eventName(e.name), |java+field:///<pkg>/<e.name>$event| > | (ClassMemberDec)`<Event e>` <- stm.top.ctl.members }
-    + { <stmName(), |java+class:///<pkg>| > };
+  //m.mapsTo = { <stateName(s.name), |java+field:///<pkg>/<s.name>$state| > | (ClassMemberDec)`<State s>` <- stm.top.ctl.members }
+  //  + { <stateName(s.name), |java+method:///<pkg>/dispatch$<s.name>| > | (ClassMemberDec)`<State s>` <- stm.top.ctl.members }
+  //  + { <eventName(e.name), |java+field:///<pkg>/<e.name>$event| > | (ClassMemberDec)`<Event e>` <- stm.top.ctl.members }
+  //  + { <stmName(), |java+class:///<pkg>| > };
  
   m.messages = [ error("Undefined event", use) | /Transition t := stm, loc use := t.event@\loc, <use, loc decl> <- m.uses, decl notin m.declarations<0> ]
     + [ error("Undefined state", use) | /Transition t := stm, loc use := t.state@\loc, <use, loc decl> <- m.uses, decl notin m.declarations<0> ];   

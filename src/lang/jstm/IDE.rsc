@@ -61,6 +61,17 @@ void main() {
   });
 }
 
+M3 mergeM3s(M3 jstm, loc javaFile) {
+    classPath = |file:///Users/tvdstorm/CWI/multi-language-m3-demo/bin|;
+        
+    M3 jm3 = createM3FromFile(javaFile, errorRecovery = true, classPath=[classPath]);
+    
+    jpt = parse(#start[CompilationUnit], javaFile);
+    orgs = recover(jpt);
+
+    return mergeM3s(jstm, jm3, orgs);
+
+}
 
 M3 mergeM3s(M3 jstm, M3 j, rel[loc, loc] orgs) {
   jstm.declarations += { <jentity, recoverLoc(jsrc, orgs)> | <loc jentity, loc jsrc> <- j.declarations };

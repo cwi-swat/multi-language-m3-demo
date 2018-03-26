@@ -12,7 +12,6 @@ statemachine Doors {
   state closed {
     System.out.println("We're closed now");
     tokens.add(token);
-    Main.boom(this);
     on open => opened;
   }
   
