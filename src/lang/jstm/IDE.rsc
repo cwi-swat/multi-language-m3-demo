@@ -33,7 +33,10 @@ void main() {
 
         str javaCode = compile(pt.top);
         loc javaFile = pt@\loc[extension="java"].top;
-        M3 jm3 = createM3FromString(javaFile, javaCode, errorRecovery = true);
+        classPath = |file:///Users/tvdstorm/CWI/multi-language-m3-demo/bin|;
+        
+        M3 jm3 = createM3FromString(javaFile, javaCode, 
+            errorRecovery = true, classPath=[classPath]);
         
         jpt = parse(#start[CompilationUnit], javaCode, javaFile);
         orgs = recover(jpt);

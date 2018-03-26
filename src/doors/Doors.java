@@ -22,8 +22,9 @@ public class Doors {
   
   
   private void dispatch$closed(String $token) {
-     System/*src: |project://multi-language-m3-demo/src/doors/Doors.jstm|(216,6,<13,4>,<13,10>) */.out/*src: |project://multi-language-m3-demo/src/doors/Doors.jstm|(223,3,<13,11>,<13,14>) */.println/*src: |project://multi-language-m3-demo/src/doors/Doors.jstm|(227,7,<13,15>,<13,22>) */("We're closed now");
-         tokens/*src: |project://multi-language-m3-demo/src/doors/Doors.jstm|(260,6,<14,4>,<14,10>) */.add/*src: |project://multi-language-m3-demo/src/doors/Doors.jstm|(267,3,<14,11>,<14,14>) */($token/*src: |project://multi-language-m3-demo/src/lang/jstm/Compile.rsc|(1856,6) */);
+     System/*src: |project://multi-language-m3-demo/src/doors/Doors.jstm|(217,6,<13,4>,<13,10>) */.out/*src: |project://multi-language-m3-demo/src/doors/Doors.jstm|(224,3,<13,11>,<13,14>) */.println/*src: |project://multi-language-m3-demo/src/doors/Doors.jstm|(228,7,<13,15>,<13,22>) */("We're closed now");
+         tokens/*src: |project://multi-language-m3-demo/src/doors/Doors.jstm|(261,6,<14,4>,<14,10>) */.add/*src: |project://multi-language-m3-demo/src/doors/Doors.jstm|(268,3,<14,11>,<14,14>) */($token/*src: |project://multi-language-m3-demo/src/lang/jstm/Compile.rsc|(1856,6) */);
+         Main/*src: |project://multi-language-m3-demo/src/doors/Doors.jstm|(284,4,<15,4>,<15,8>) */.boom/*src: |project://multi-language-m3-demo/src/doors/Doors.jstm|(289,4,<15,9>,<15,13>) */(this);
      
        if ($token.equals(open$event)) {
           $state = opened$state;
@@ -32,7 +33,7 @@ public class Doors {
   }
   
   private void dispatch$opened(String $token) {
-     System/*src: |project://multi-language-m3-demo/src/doors/Doors.jstm|(330,6,<19,4>,<19,10>) */.out/*src: |project://multi-language-m3-demo/src/doors/Doors.jstm|(337,3,<19,11>,<19,14>) */.println/*src: |project://multi-language-m3-demo/src/doors/Doors.jstm|(341,7,<19,15>,<19,22>) */("We're opened now");
+     System/*src: |project://multi-language-m3-demo/src/doors/Doors.jstm|(352,6,<20,4>,<20,10>) */.out/*src: |project://multi-language-m3-demo/src/doors/Doors.jstm|(359,3,<20,11>,<20,14>) */.println/*src: |project://multi-language-m3-demo/src/doors/Doors.jstm|(363,7,<20,15>,<20,22>) */("We're opened now");
      
        if ($token.equals(close$event)) {
           $state = closed$state;
