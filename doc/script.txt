@@ -1,0 +1,47 @@
+
+// Setup
+
+import lang::jstm::IDE;
+main();
+import util::ValueUI;
+
+javaFile = |project://multi-language-m3-demo/src/doors/Doors.java|;
+doorsFile = |project://multi-language-m3-demo/src/doors/Doors.jstm|;
+
+
+// Show the Doors file
+// jump to definition both Java and DSL
+// outline
+// highlighting
+// save = compile, show java code.
+
+
+// Parse the file
+
+import ParseTree;
+
+import lang::jstm::JStm;
+
+doorsFile = |project://multi-language-m3-demo/src/doors/Doors.jstm|;
+doors = parse(#start[JStm], doorsFile);
+
+// M3 generation
+
+import lang::jstm::M3;
+
+doorsM3 = stm2m3(doors);
+
+// Java M3
+
+import lang::java::m3::Core;
+
+javaFile = |project://multi-language-m3-demo/src/doors/Doors.java|;
+
+doorsJavaM3 = createM3FromFile(javaFile);
+
+
+
+// 
+
+Main.boom(this); 
+
