@@ -13,7 +13,7 @@ import salix::lib::Dagre;
 alias Model = start[JStm];
 
 App[Model] jstmApp(start[JStm] pt)
-  = app(Model() { return pt; }, view, update, |http://localhost:7222/index.html|,
+  = app(Model() { return pt; }, view, update, |http://localhost:7223/index.html|,
       |project://multi-language-m3-demo/src|);
 
 
@@ -25,6 +25,31 @@ void view(Model pt) {
   div(() {
     
     h2("JStm <pt.top.ctl.name>");
+    
+    h3("Code");
+    for (ClassMemberDec cd <- pt.top.ctl.members, !(cd is event), !(cd is state)) {
+      highlightToHtml(cd);
+    }
+    
+    h3("Events");
+    
+    table(() {
+      thead(() {
+        th("Event");
+        th("Token");
+      });
+      tbody(() {
+	    for ((ClassMemberDec)`event <Id e> <StringLiteral token>;` <- pt.top.ctl.members) {
+	      tr(() {
+	        td("<e>");
+	        td("<token>");
+	      });
+	    }
+      });
+    });
+    
+    
+    h3("State machine");
     
     dagre("mygraph", rankdir("LR"), width(960), height(600), (N n, E e) {
       for ((ClassMemberDec)`state <Id x> {<BlockStm* stms> <Transition* _>}` <- pt.top.ctl.members) {
