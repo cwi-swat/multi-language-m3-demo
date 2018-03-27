@@ -3,5 +3,6 @@ Bundle-ManifestVersion: 2
 Bundle-Name: multi_language_m3_demo
 Bundle-SymbolicName: multi_language_m3_demo
 Bundle-Version: 1.0.0
-Require-Bundle: rascal_eclipse
+Require-Bundle: rascal_eclipse,
+ salix;bundle-version="0.1.0"
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8

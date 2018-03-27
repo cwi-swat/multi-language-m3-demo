@@ -40,15 +40,14 @@ javaFile = |project://multi-language-m3-demo/src/doors/Doors.java|;
 
 doorsJavaM3 = createM3FromFile(javaFile);
 
-// Combine
+// Combine (the magic!)
 
 m3both = mergeM3s(doorsM3, javaFile);
 
 text(m3both); // show uses between state machines and java methods
 
-
-
 // If time permits
 
+// reentrancy bug a la Ethereum problem
 Main.boom(this); 
 
